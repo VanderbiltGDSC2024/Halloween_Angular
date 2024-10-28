@@ -3,7 +3,8 @@ import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map',
-  template: `<div id="map" style="height: 400px;"></div>`,
+  template: `<div id="map" style="height: 800px"></div>`,
+  standalone: true,
   styles: []
 })
 export class MapComponent implements AfterViewInit {
@@ -18,7 +19,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
+    this.map = L.map('map').setView([36.140694, -86.798191], 18);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
