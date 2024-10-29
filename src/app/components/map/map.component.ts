@@ -9,7 +9,6 @@ import { getData } from '../../../backend/firebase';
   template: `<div id="map" style="height: 800px;"></div>`,
   standalone: true,
   imports: [CommonModule],
-  styles: []
 })
 export class MapComponent implements OnInit {
   private map: L.Map | L.LayerGroup<any>;

@@ -24,6 +24,7 @@ const getData = async (): Promise<any[]> => {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
 
+
             //console.log(`Document ID: ${doc.id}`, doc.data());
             houses.push({ id: doc.id, ...doc.data() }); // Push each document's data into the array
             if (data && data['name']) {
@@ -40,6 +41,7 @@ const getData = async (): Promise<any[]> => {
         return []; // Return an empty array in case of an error
     }
 };
+
 
 const setData = async (houseName: string, rating: string): Promise<void> => {
     try {
@@ -64,3 +66,4 @@ const setData = async (houseName: string, rating: string): Promise<void> => {
     }
 };
 export { getData, setData };
+
