@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MapComponent } from "./components/map/map.component";
-import { TestComponent } from './components/temp/test/test.component';
-import { CommonModule } from '@angular/common';
-
+import { MapComponent } from './components/map/map.component';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
-  title = 'Halloween';
+  
 }

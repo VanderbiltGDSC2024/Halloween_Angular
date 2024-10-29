@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, FirebaseApp } from "firebase/app";
-import { getFirestore, Firestore, collection, getDocs, QuerySnapshot, DocumentData } from "firebase/firestore";
+import { getFirestore, Firestore, collection, getDocs, QuerySnapshot, DocumentData, doc, updateDoc} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig: Record<string, string> = {
@@ -24,10 +24,11 @@ const getData = async (): Promise<any[]> => {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
 
-            console.log(`Document ID: ${doc.id}`, doc.data());
+
+            //console.log(`Document ID: ${doc.id}`, doc.data());
             houses.push({ id: doc.id, ...doc.data() }); // Push each document's data into the array
             if (data && data['name']) {
-                console.log(data['name']);
+                //console.log(data['name']);
             } else {
                 console.log(`Document ${doc.id} does not have a 'name' property.`);
             }
@@ -41,4 +42,28 @@ const getData = async (): Promise<any[]> => {
     }
 };
 
-export { getData };
+
+const setData = async (houseName: string, rating: string): Promise<void> => {
+    try {
+        const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(collection(db, "houses"));
+        let houseDocId: string | null = null;
+    
+        querySnapshot.forEach((doc) => {
+          if (doc.data()['name'] === houseName) {
+            houseDocId = doc.id;
+          }
+        });
+    
+        if (houseDocId) {
+          const houseDocRef = doc(db, "houses", houseDocId);
+          await updateDoc(houseDocRef, { rating });
+          console.log(`Rating for ${houseName} has been updated to ${rating}`);
+        } else {
+          console.error(`House with name ${houseName} not found.`);
+        }
+      } catch (error) {
+        console.error("Error setting data: ", error);
+    }
+};
+export { getData, setData };
+
